@@ -1,0 +1,12 @@
+[Unit]
+Description=EasePi-R2 Network Interface Rename
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/easepi-net-rename.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target

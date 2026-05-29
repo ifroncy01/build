@@ -1,0 +1,10 @@
+[Unit]
+Description=Apply IR keymap configuration
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/ir/ir-setup.sh
+
+[Install]
+WantedBy=multi-user.target
