@@ -1,7 +1,8 @@
 [Unit]
-Description=EasePi-R2 Bluetooth HCIAttach fix
+Description=EasePi Bluetooth HCIAttach
 After=network.target
 StartLimitIntervalSec=0
+
 [Service]
 Type=simple
 ExecStart=/usr/local/sbin/bluetooth-hciattach.sh

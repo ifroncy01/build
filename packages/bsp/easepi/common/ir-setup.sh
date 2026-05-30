@@ -1,5 +1,5 @@
 #!/bin/bash
-# EasePi A2 IR device setup script
+# EasePi 通用红外设置脚本
 
 echo "Detecting IR devices..."
 
