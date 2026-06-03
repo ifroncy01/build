@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest # ubuntu-24.04-arm, ubuntu-24.04-riscv
     steps:
-      - uses: armbian/build@main
+      - uses: ifroncy01/build@main
         with:
           armbian_token: ${{ secrets.GITHUB_TOKEN }}
           armbian_board: "easepi-a2 easepi-r2" # orangepi5 bananapif3
