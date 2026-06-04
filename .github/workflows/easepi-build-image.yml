@@ -51,7 +51,7 @@ jobs:
             ${{ github.workflow }}-${{ github.ref_name }}-${{ matrix.board }}
 
       # 调用第三方Armbian编译Action执行固件构建
-      - uses: ifroncy01/build@main
+      - uses: armbian/build@main
         with:
           armbian_token: ${{ secrets.GITHUB_TOKEN }} # 内置token用于Release资产上传
           armbian_board: ${{ matrix.board }}         # 从矩阵读取当前编译主板型号
