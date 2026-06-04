@@ -9,7 +9,7 @@ jobs:
       - uses: ifroncy01/build@main
         with:
           armbian_token: ${{ secrets.GITHUB_TOKEN }}
-          armbian_board: "easepi-a2" # orangepi5 bananapif3
+          armbian_board: "easepi-a2"
           armbian_release: "trixie" # trixie
           armbian_target: "build"
           armbian_ui: "minimal" # server xfce
