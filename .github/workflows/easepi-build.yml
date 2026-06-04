@@ -9,7 +9,7 @@ jobs:
       - uses: ifroncy01/build@main
         with:
           armbian_token: ${{ secrets.GITHUB_TOKEN }}
-          armbian_board: "easepi-a2,easepi-r2" # easepi-r2 easepi-r1
+          armbian_board: "easepi-a2" # easepi-r2 easepi-r1
           armbian_kernel_branch: "current" # edge vendor bleedingedge
 
           armbian_release: "trixie" # noble bookworm
