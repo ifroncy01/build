@@ -8,17 +8,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest # ubuntu-24.04-arm, ubuntu-24.04-riscv
+    runs-on: ubuntu-latest
+    env:
+      BOARD_NAME: easepi-a2
     steps:
       - uses: ifroncy01/build@main
         with:
           armbian_token: ${{ secrets.GITHUB_TOKEN }}
-          armbian_board: "easepi-a2" # easepi-r2 easepi-r1
-          armbian_kernel_branch: "vendor" # edge vendor bleedingedge current
-          armbian_release: "noble" # noble bookworm trixie
-          armbian_target: "build" # kernel uboot kernel-dtb
-          armbian_ui: "xfce" # server xfce gnome
-          armbian_compress: "xz" # img,xz
+          armbian_board: ${{ env.BOARD_NAME }}
+          armbian_kernel_branch: "vendor"
+          armbian_release: "noble"
+          armbian_target: "build"
+          armbian_ui: "xfce"
+          armbian_compress: "xz"
           armbian_runner_clean: "yes"
-          armbian_release_prerelease: "yes"          # 预发布草稿Release，支持重复上传，规避immutable锁定
-          armbian_release_tag: "build-${{ github.run_number }}-${{ matrix.board }}" # 动态唯一标签，根治旧tag占用422报错
+          armbian_release_prerelease: "yes"
+          armbian_release_tag: "build-${{ github.run_number }}-${{ env.BOARD_NAME }}"
