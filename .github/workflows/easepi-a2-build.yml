@@ -1,4 +1,4 @@
-name: Build Armbian Image
+name: Build EasePi-A2 Armbian Image
 on:
   workflow_dispatch:
 
