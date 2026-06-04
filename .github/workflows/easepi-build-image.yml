@@ -46,4 +46,4 @@ jobs:
           armbian_compress: "xz"
           armbian_runner_clean: "no"
           armbian_release_prerelease: "yes"
-          armbian_custom_tag: "build-${{ github.run_number }}-${{ matrix.board }}"
+          armbian_release_tag: "build-${{ github.run_number }}-${{ matrix.board }}"
