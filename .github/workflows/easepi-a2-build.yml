@@ -19,4 +19,5 @@ jobs:
           armbian_release: "trixie" # noble bookworm
           armbian_target: "build" # kernel uboot kernel-dtb
           armbian_ui: "minimal" # server xfce gnome
+          armbian_compress: "img" # img,xz
           armbian_runner_clean: "yes" # recommended for Github runners
