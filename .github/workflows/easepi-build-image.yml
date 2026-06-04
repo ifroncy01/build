@@ -22,11 +22,11 @@ jobs:
         include:
           - board: easepi-a2
             kernel: vendor
-            distro: trixie
-            desktop: minimal
+            distro: noble
+            desktop: xfce
           - board: easepi-r2
             kernel: vendor
-            distro: trixie
+            distro: noble
             desktop: xfce
 
     steps:
