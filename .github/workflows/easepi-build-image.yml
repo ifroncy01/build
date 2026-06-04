@@ -51,7 +51,7 @@ jobs:
         with:
           armbian_token: ${{ secrets.GITHUB_TOKEN }} # 内置token用于Release资产上传
           armbian_board: ${{ matrix.board }}         # 从矩阵读取当前编译主板型号
-          armbian_kernel_branch: ${{ matrix.kernel }}# 从矩阵读取内核分支(vendor/current/edge)
+          armbian_kernel_branch: ${{ matrix.kernel }} # 从矩阵读取内核分支(vendor/current/edge)
           armbian_release: ${{ matrix.distro }}       # 从矩阵读取Debian发行版(trixie/noble/bookworm)
           armbian_target: "build"                    # 构建目标：完整编译系统镜像
           armbian_ui: ${{ matrix.desktop }}          # 桌面类型：minimal服务端/xfce桌面
