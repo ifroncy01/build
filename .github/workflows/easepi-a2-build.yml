@@ -14,10 +14,9 @@ jobs:
         with:
           armbian_token: ${{ secrets.GITHUB_TOKEN }}
           armbian_board: "easepi-a2" # easepi-r2 easepi-r1
-          armbian_kernel_branch: "current" # edge vendor bleedingedge
-
-          armbian_release: "trixie" # noble bookworm
+          armbian_kernel_branch: "vendor" # edge vendor bleedingedge current
+          armbian_release: "noble" # noble bookworm trixie
           armbian_target: "build" # kernel uboot kernel-dtb
-          armbian_ui: "minimal" # server xfce gnome
+          armbian_ui: "xfce" # server xfce gnome
           armbian_compress: "xz" # img,xz
-          armbian_runner_clean: "no"
+          armbian_runner_clean: "yes"
