@@ -20,3 +20,5 @@ jobs:
           armbian_ui: "xfce" # server xfce gnome
           armbian_compress: "xz" # img,xz
           armbian_runner_clean: "yes"
+          armbian_release_prerelease: "yes"          # 预发布草稿Release，支持重复上传，规避immutable锁定
+          armbian_release_tag: "build-${{ github.run_number }}-${{ matrix.board }}" # 动态唯一标签，根治旧tag占用422报错
