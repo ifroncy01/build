@@ -1,0 +1,60 @@
+# 工作流权限配置：开启仓库写入、软件包管理、PR相关权限，解决Release上传403报错
+permissions:
+  contents: write       # 允许读写仓库代码、创建Tag/Release、上传固件资产
+  packages: write       # 支持制品包推送权限
+  pull-requests: write  # 补充PR操作权限，规避集成授权不足
+
+# 工作流名称：多机型批量编译Armbian固件
+name: Build Multi-Board Armbian Image
+
+# 触发方式：仅支持手动在Github页面点击运行
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # 使用Github官方Ubuntu云端构建环境
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # 关闭快速失败：单个板子编译失败，其余任务继续运行不终止
+      # 矩阵配置：不同硬件差异化编译参数
+      matrix:
+        include:
+          # EasePi-A2：vendor原厂内核 + trixie系统 + minimal无桌面服务版
+          - board: easepi-a2
+            kernel: vendor
+            distro: trixie
+            desktop: minimal
+          # EasePi-R2：vendor原厂内核 + trixie系统 + xfce桌面版
+          - board: easepi-r2
+            kernel: vendor
+            distro: trixie
+            desktop: xfce
+
+    steps:
+      # 缓存任务：缓存内核源码、apt依赖包、ccache编译缓存，二次编译大幅缩短耗时
+      - name: Cache Armbian Build Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            build/cache       # 内核、uboot源码下载缓存目录
+            armbian/cache     # Debian源deb包、rootfs根文件系统缓存
+            build/.ccache     # C/C++内核编译缓存，加速重复编译
+          # 缓存唯一KEY：工作流名+分支+板子+系统+内核，各机型缓存相互隔离不冲突
+          key: ${{ github.workflow }}-${{ github.ref_name }}-${{ matrix.board }}-${{ matrix.distro }}-${{ matrix.kernel }}
+          # 缓存降级匹配：优先同板子历史缓存，找不到再模糊匹配
+          restore-keys: |
+            ${{ github.workflow }}-${{ github.ref_name }}-${{ matrix.board }}
+
+      # 调用第三方Armbian编译Action执行固件构建
+      - uses: ifroncy01/build@main
+        with:
+          armbian_token: ${{ secrets.GITHUB_TOKEN }} # 内置token用于Release资产上传
+          armbian_board: ${{ matrix.board }}         # 从矩阵读取当前编译主板型号
+          armbian_kernel_branch: ${{ matrix.kernel }}# 从矩阵读取内核分支(vendor/current/edge)
+          armbian_release: ${{ matrix.distro }}       # 从矩阵读取Debian发行版(trixie/noble/bookworm)
+          armbian_target: "build"                    # 构建目标：完整编译系统镜像
+          armbian_ui: ${{ matrix.desktop }}          # 桌面类型：minimal服务端/xfce桌面
+          armbian_compress: "xz"                     # 固件输出格式：仅生成.xz压缩镜像
+          armbian_runner_clean: "no"                 # 关闭编译后自动清理目录，配合cache持久化缓存
+          armbian_release_draft: "yes"               # 生成草稿Release，可反复上传固件，规避immutable锁定报错
