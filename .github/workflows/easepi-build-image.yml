@@ -21,11 +21,16 @@ jobs:
           - board: easepi-r2
             kernel: vendor
             distro: trixie
-            desktop: xfce
+            desktop: minimal
 
     steps:
+      - name: Fix cache folder permission
+        run: |
+          sudo mkdir -p build/cache armbian/cache build/.ccache
+          sudo chmod -R 777 build/cache armbian/cache build/.ccache
+
       - name: Cache Armbian Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             build/cache
