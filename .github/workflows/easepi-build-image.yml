@@ -57,4 +57,4 @@ jobs:
           armbian_ui: ${{ matrix.desktop }}          # 桌面类型：minimal服务端/xfce桌面
           armbian_compress: "xz"                     # 固件输出格式：仅生成.xz压缩镜像
           armbian_runner_clean: "no"                 # 关闭编译后自动清理目录，配合cache持久化缓存
-          armbian_release_draft: "yes"               # 生成草稿Release，可反复上传固件，规避immutable锁定报错
+          armbian_release_prerelease: "yes"               # 生成草稿Release，可反复上传固件，规避immutable锁定报错
