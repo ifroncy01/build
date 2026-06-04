@@ -61,6 +61,6 @@ jobs:
           armbian_target: "build"                    # 构建目标：完整编译系统镜像
           armbian_ui: ${{ matrix.desktop }}          # 桌面类型：minimal服务端/xfce桌面
           armbian_compress: "xz"                     # 固件输出格式：仅生成.xz压缩镜像
-          armbian_runner_clean: "no"                 # 关闭编译后自动清理目录，配合cache持久化缓存
+          armbian_runner_clean: "yes"                 # 编译后自动清理目录，配合cache持久化缓存
           armbian_release_prerelease: "yes"          # 预发布草稿Release，支持重复上传，规避immutable锁定
           armbian_release_tag: "build-${{ github.run_number }}-${{ matrix.board }}" # 动态唯一标签，根治旧tag占用422报错
