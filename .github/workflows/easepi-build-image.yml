@@ -20,15 +20,14 @@ jobs:
       # 矩阵配置
       matrix:
         include:
-          - board: easepi-a2
-            kernel: vendor
-            distro: noble
-            desktop: xfce
           - board: easepi-r2
             kernel: vendor
             distro: noble
             desktop: xfce
-
+          - board: easepi-a2
+            kernel: vendor
+            distro: noble
+            desktop: minimal
     steps:
       - name: Pre-Clean workspace & fix full directory permission
         run: |
