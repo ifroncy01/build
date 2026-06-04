@@ -1,3 +1,7 @@
+permissions:
+  contents: write # 开启仓库内容写入、创建Release/Tag权限
+  packages: write
+
 name: Build EasePi-A2 Armbian Image
 on:
   workflow_dispatch:
