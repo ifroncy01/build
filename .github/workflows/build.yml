@@ -1,4 +1,4 @@
-qname: Build Armbian Image
+name: Build Armbian Image
 on:
   workflow_dispatch:
 
